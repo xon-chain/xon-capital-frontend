@@ -2,10 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* You can still add custom global resets here */
+/* Global resets */
 html,
 body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background-color: #000; /* Fallback for gradient */
+  color: #fff;
 }

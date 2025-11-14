@@ -5,7 +5,7 @@ import Providers from "../components/Providers";
 
 export const metadata = {
   title: "Xon Capital",
-  description: "Investor portal for Xon Capital hedge fund",
+  description: "Quantitative crypto hedge fund",
 };
 
 export default function RootLayout({
@@ -15,10 +15,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col bg-gray-50 text-gray-900">
+      <body className="min-h-screen flex flex-col bg-gradient-to-b from-black via-gray-950 to-black text-white">
         <Providers>
           <Navbar />
-          <main className="flex-1 container mx-auto p-6">{children}</main>
+          <main className="flex-1">{children}</main>
           <Footer />
         </Providers>
       </body>

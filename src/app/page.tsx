@@ -17,10 +17,10 @@ export default function HomePage() {
           playsInline
         />
         {/* Gradient + Glass Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/40 to-black/90" />
 
         {/* Ambient Light Glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(0,150,255,0.25),transparent_70%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(0,150,255,0.25),transparent_70%)]" />
 
         {/* Hero Text */}
         <div className="relative z-10 px-6">
@@ -30,7 +30,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
           >
-            Institutional Crypto Strategies
+            Institutional Crypto Alpha
           </motion.h1>
 
           <motion.p
@@ -39,9 +39,10 @@ export default function HomePage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}
           >
-            Xon Capital delivers uncorrelated returns through systematic
-            strategies spanning long/short crypto, perpetual derivatives,
-            arbitrage, and delta-neutral yield. Designed for institutions.
+            Xon Capital is a quantitative hedge fund applying long/short,
+            delta-neutral, and arbitrage strategies across global digital asset
+            markets. Built for performance, precision, and stability in a
+            volatile landscape.
           </motion.p>
 
           {/* Strategy Tags */}
@@ -52,10 +53,10 @@ export default function HomePage() {
             transition={{ delay: 0.6, duration: 0.8 }}
           >
             {[
-              "Systematic Alpha",
-              "Delta-Neutral Yield",
-              "Perpetual Futures",
-              "Cross-Venue Arbitrage",
+              "Systematic Long/Short",
+              "Perpetual Derivatives",
+              "Market-Neutral Yield",
+              "Cross-Exchange Arbitrage",
             ].map((strategy, i) => (
               <div
                 key={i}
@@ -81,31 +82,31 @@ export default function HomePage() {
       {/* ===================== STRATEGY GRID ===================== */}
       <section className="py-32 bg-gradient-to-b from-black via-gray-950 to-black text-center px-6">
         <h2 className="text-4xl md:text-5xl font-bold mb-16 bg-gradient-to-r from-white via-gray-300 to-gray-400 bg-clip-text text-transparent">
-          Multi-Strategy Alpha Engine
+          Multi-Strategy Digital Asset Fund
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 max-w-7xl mx-auto">
           {[
             {
               title: "Directional Alpha",
-              desc: "Dynamic exposure across BTC, ETH, and majors driven by predictive volatility and liquidity-adjusted models.",
+              desc: "Quantitative long/short exposure across BTC, ETH, and majors, driven by momentum, volatility, and liquidity models.",
             },
             {
-              title: "Perpetual Derivatives",
-              desc: "Delta-hedged positions capturing funding inefficiencies and term-structure mispricings across perps.",
+              title: "Perpetual Futures",
+              desc: "Systematic funding rate and basis arbitrage across global derivatives markets with dynamic delta hedging.",
             },
             {
               title: "Cross-Venue Arbitrage",
-              desc: "Multi-exchange execution capturing basis spreads and latency arbitrage via co-located systems.",
+              desc: "Low-latency execution capturing inefficiencies across centralized and on-chain venues via co-located systems.",
             },
             {
               title: "Market-Neutral Yield",
-              desc: "Volatility harvesting strategies providing consistent monthly returns with controlled tail exposure.",
+              desc: "Volatility harvesting and delta-neutral portfolios targeting consistent monthly returns with controlled drawdowns.",
             },
           ].map((s, i) => (
             <motion.div
               key={i}
-              className="p-8 bg-gradient-to-br from-gray-900/60 to-gray-800/30 border border-white/10 rounded-2xl hover:border-blue-400/40 hover:shadow-[0_0_30px_rgba(0,150,255,0.15)] transition"
+              className="p-8 bg-gradient-to-br from-gray-900/60 to-gray-800/30 border border-white/10 rounded-2xl hover:border-blue-400/40 hover:shadow-[0_0_35px_rgba(0,150,255,0.15)] transition"
               whileHover={{ scale: 1.03 }}
             >
               <h3 className="text-xl font-semibold mb-3 text-blue-300">
@@ -125,43 +126,44 @@ export default function HomePage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          Consistent Alpha, Controlled Risk
+          Consistent Alpha. Controlled Risk.
         </motion.h2>
         <p className="text-gray-400 max-w-2xl mx-auto mb-12">
-          Risk-managed portfolio architecture targeting superior Sharpe ratios
-          through disciplined volatility scaling and cross-asset
-          diversification.
+          Our portfolio architecture emphasizes capital preservation and
+          risk-adjusted performance. Through volatility scaling, liquidity
+          weighting, and cross-venue diversification, we aim to deliver superior
+          Sharpe ratios independent of market direction.
         </p>
         <div className="max-w-5xl mx-auto bg-gradient-to-br from-gray-900/70 to-gray-800/40 border border-white/10 rounded-2xl h-72 flex items-center justify-center text-gray-500">
           [ Performance Chart Placeholder ]
         </div>
       </section>
 
-      {/* ===================== PHILOSOPHY / ABOUT ===================== */}
+      {/* ===================== PHILOSOPHY ===================== */}
       <section className="py-28 bg-gradient-to-b from-gray-950 to-black text-center px-6">
         <h2 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-white via-gray-300 to-gray-400 bg-clip-text text-transparent">
           Our Philosophy
         </h2>
         <p className="text-gray-400 max-w-3xl mx-auto mb-16 leading-relaxed text-lg">
-          Xon Capital operates at the intersection of quantitative rigor and
-          crypto-native execution. We integrate systematic research, low-latency
-          infrastructure, and disciplined risk management to compound asymmetric
-          returns — independent of market direction.
+          Xon Capital operates at the intersection of quantitative research and
+          crypto-native execution. Our strategies are engineered to perform
+          across market cycles — extracting inefficiencies through data,
+          automation, and risk discipline.
         </p>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-left">
           {[
             {
-              title: "Data-Driven",
-              desc: "All strategies originate from empirical research and validated backtests over multi-cycle datasets.",
+              title: "Data-Driven Research",
+              desc: "Strategies originate from rigorous quantitative modeling, backtesting, and statistical validation across multi-cycle datasets.",
             },
             {
-              title: "Execution Precision",
-              desc: "Our proprietary infrastructure optimizes fill quality and latency-sensitive order routing across venues.",
+              title: "Execution Infrastructure",
+              desc: "Our proprietary execution engine integrates centralized and decentralized venues with latency-sensitive routing and smart order flow.",
             },
             {
-              title: "Risk Discipline",
-              desc: "Position sizing, VaR control, and tail-risk modeling ensure consistent return distribution integrity.",
+              title: "Institutional Risk Framework",
+              desc: "Dynamic position sizing, drawdown management, and VaR-based allocation ensure consistent capital efficiency and downside protection.",
             },
           ].map((item, i) => (
             <div key={i}>
@@ -175,12 +177,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
-      {/* ===================== FOOTER ===================== */}
-      <footer className="py-10 border-t border-gray-900 text-center text-gray-500 text-sm">
-        © {new Date().getFullYear()} Xon Capital — Institutional Crypto Hedge
-        Fund
-      </footer>
     </main>
   );
 }

@@ -2,10 +2,15 @@ import "./globals.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Providers from "../components/Providers";
+import type { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Xon Capital",
-  description: "Quantitative crypto hedge fund",
+  description:
+    "Quantitative crypto hedge fund generating systematic alpha across digital asset markets.",
+  icons: {
+    icon: "/xoncapital.ico", // Use the renamed icon
+  },
 };
 
 export default function RootLayout({

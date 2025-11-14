@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -16,14 +17,18 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-lg border-b border-white/10">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-sm border-none transition-all duration-300">
       <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
         {/* Logo */}
-        <Link
-          href="/"
-          className="text-xl font-bold tracking-tight bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400 bg-clip-text text-transparent"
-        >
-          Xon Capital
+        <Link href="/" className="flex items-center space-x-3">
+          <Image
+            src="/xoncapital_logo_transparent.png"
+            alt="Xon Capital Logo"
+            width={160}
+            height={40}
+            priority
+            className="h-auto w-auto"
+          />
         </Link>
 
         {/* Desktop Links */}
@@ -41,7 +46,7 @@ export default function Navbar() {
           {session ? (
             <Link
               href="/dashboard"
-              className="px-4 py-2 bg-white text-black rounded-md font-semibold hover:bg-gray-200 transition"
+              className="px-4 py-2 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-400 text-black font-semibold rounded-md hover:opacity-90 transition"
             >
               Dashboard
             </Link>
@@ -90,7 +95,7 @@ export default function Navbar() {
               <Link
                 href="/dashboard"
                 onClick={() => setOpen(false)}
-                className="block px-4 py-2 mx-auto bg-white text-black rounded-md w-40 font-semibold hover:bg-gray-200 transition"
+                className="block px-4 py-2 mx-auto bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-400 text-black rounded-md w-40 font-semibold hover:opacity-90 transition"
               >
                 Dashboard
               </Link>

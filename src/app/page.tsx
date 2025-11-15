@@ -16,16 +16,17 @@ export default function HomePage() {
           muted
           playsInline
         />
-        {/* Gradient + Glass Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/40 to-black/90" />
 
-        {/* Ambient Light Glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(0,150,255,0.25),transparent_70%)]" />
+        {/* Darker Gradient Overlay for Better Readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/75 to-black/90" />
+
+        {/* Subtle Ambient Light Glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(0,150,255,0.15),transparent_70%)]" />
 
         {/* Hero Text */}
         <div className="relative z-10 px-6">
           <motion.h1
-            className="text-6xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400 bg-clip-text text-transparent"
+            className="text-6xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight bg-gradient-to-r from-blue-400 via-cyan-300 to-purple-400 bg-clip-text text-transparent drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
@@ -34,7 +35,7 @@ export default function HomePage() {
           </motion.h1>
 
           <motion.p
-            className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed"
+            className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed drop-shadow-[0_1px_4px_rgba(0,0,0,0.8)]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.3, duration: 1 }}

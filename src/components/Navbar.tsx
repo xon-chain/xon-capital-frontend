@@ -12,8 +12,8 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   const navLinks = [
-    { name: "Strategy", href: "/strategy" },
-    { name: "Risk", href: "/risk" },
+    { name: "STRATEGY", href: "/strategy" },
+    { name: "RISK", href: "/risk" },
   ];
 
   return (
@@ -37,7 +37,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-gray-300 hover:text-white transition"
+              className="text-gray-300 hover:text-white transition tracking-wide"
             >
               {link.name}
             </Link>
@@ -46,14 +46,14 @@ export default function Navbar() {
           {session ? (
             <Link
               href="/dashboard"
-              className="px-4 py-2 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-400 text-black font-semibold rounded-md hover:opacity-90 transition"
+              className="px-5 py-2 rounded-md bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-400 text-black font-semibold shadow-lg hover:opacity-90 hover:scale-[1.02] transition-all duration-200"
             >
               Dashboard
             </Link>
           ) : (
             <Link
               href="/login"
-              className="px-4 py-2 border border-white/20 rounded-md text-gray-200 hover:bg-white hover:text-black transition"
+              className="px-5 py-2 rounded-md bg-gradient-to-r from-[#0a0f1a]/60 via-[#0a0f1a]/40 to-[#1a1f2a]/60 border border-white/10 backdrop-blur-md text-gray-200 font-medium tracking-wide hover:border-blue-400 hover:text-white hover:shadow-[0_0_15px_rgba(0,150,255,0.3)] hover:scale-[1.03] transition-all duration-300"
             >
               Investor Login
             </Link>
@@ -103,7 +103,7 @@ export default function Navbar() {
               <Link
                 href="/login"
                 onClick={() => setOpen(false)}
-                className="block px-4 py-2 mx-auto border border-white/20 rounded-md text-gray-200 hover:bg-white hover:text-black w-40 transition"
+                className="block px-4 py-2 mx-auto rounded-md bg-gradient-to-r from-[#0a0f1a]/60 via-[#0a0f1a]/40 to-[#1a1f2a]/60 border border-white/10 backdrop-blur-md text-gray-200 hover:border-blue-400 hover:text-white hover:shadow-[0_0_15px_rgba(0,150,255,0.3)] w-40 transition-all duration-300"
               >
                 Investor Login
               </Link>

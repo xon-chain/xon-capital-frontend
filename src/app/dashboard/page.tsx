@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useSession } from "next-auth/react";
-import LogoutButton from "@/components/LogoutButton";
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
@@ -29,7 +28,9 @@ export default function DashboardPage() {
         </motion.h1>
 
         <p className="text-lg text-gray-400 mb-12">
-          Welcome, <span className="text-blue-300 font-semibold">{userName}</span> — your secure investor portal.
+          Welcome,{" "}
+          <span className="text-blue-300 font-semibold">{userName}</span> — your
+          secure investor portal.
         </p>
 
         {/* ================== METRIC CARDS ================== */}
@@ -82,7 +83,8 @@ export default function DashboardPage() {
               • <span className="text-white">Perpetual Derivatives</span> — 20%
             </li>
             <li>
-              • <span className="text-white">Cross-Exchange Arbitrage</span> — 20%
+              • <span className="text-white">Cross-Exchange Arbitrage</span> —
+              20%
             </li>
           </ul>
         </motion.div>
@@ -105,9 +107,6 @@ export default function DashboardPage() {
             focus on model rebalancing and volatility harvesting opportunities.
           </p>
         </motion.div>
-
-        {/* ================== LOGOUT BUTTON ================== */}
-        <LogoutButton />
       </div>
     </main>
   );

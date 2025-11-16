@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { Menu, X, LogOut } from "lucide-react";
+import { useSession, signOut } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
@@ -15,6 +15,29 @@ export default function Navbar() {
     { name: "STRATEGY", href: "/strategy" },
     { name: "RISK", href: "/risk" },
   ];
+
+  // ✅ Azure AD + NextAuth unified sign-out with homepage redirect
+  const handleSignOut = async () => {
+    const tenantId = process.env.NEXT_PUBLIC_AZURE_AD_TENANT_ID;
+    const homepageUrl = window.location.origin + "/"; // Explicit homepage redirect
+
+    const logoutUrl = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/logout?post_logout_redirect_uri=${encodeURIComponent(
+      homepageUrl,
+    )}`;
+
+    // 1️⃣ Clear NextAuth session
+    await signOut({ redirect: false });
+
+    // 2️⃣ UX fade effect before redirect
+    document.body.style.transition = "opacity 0.4s ease";
+    document.body.style.opacity = "0.6";
+    document.body.style.cursor = "wait";
+
+    // 3️⃣ Redirect to Azure logout (which returns user to homepage)
+    setTimeout(() => {
+      window.location.href = logoutUrl;
+    }, 300);
+  };
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-sm border-none transition-all duration-300">
@@ -44,12 +67,24 @@ export default function Navbar() {
           ))}
 
           {session ? (
-            <Link
-              href="/dashboard"
-              className="px-5 py-2 rounded-md bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-400 text-black font-semibold shadow-lg hover:opacity-90 hover:scale-[1.02] transition-all duration-200"
-            >
-              Dashboard
-            </Link>
+            <>
+              {/* Dashboard Button */}
+              <Link
+                href="/dashboard"
+                className="px-5 py-2 rounded-md bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-400 text-black font-semibold shadow-lg hover:opacity-90 hover:scale-[1.02] transition-all duration-200"
+              >
+                Dashboard
+              </Link>
+
+              {/* Unified Sign Out */}
+              <button
+                onClick={handleSignOut}
+                className="flex items-center gap-2 px-4 py-2 border border-white/10 rounded-md text-gray-300 hover:text-white hover:border-blue-400/40 hover:bg-white/5 transition-all duration-200"
+              >
+                <LogOut size={16} />
+                <span>Sign out</span>
+              </button>
+            </>
           ) : (
             <Link
               href="/login"
@@ -106,15 +141,29 @@ export default function Navbar() {
             {/* Divider */}
             <div className="w-16 h-px bg-white/10 my-8" />
 
-            {/* CTA Button */}
+            {/* CTA Buttons */}
             {session ? (
-              <Link
-                href="/dashboard"
-                onClick={() => setOpen(false)}
-                className="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-400 text-black font-semibold rounded-lg shadow-lg hover:opacity-90 hover:scale-[1.03] transition-all duration-200"
-              >
-                Dashboard
-              </Link>
+              <>
+                <Link
+                  href="/dashboard"
+                  onClick={() => setOpen(false)}
+                  className="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-400 text-black font-semibold rounded-lg shadow-lg hover:opacity-90 hover:scale-[1.03] transition-all duration-200"
+                >
+                  Dashboard
+                </Link>
+
+                {/* Mobile Sign Out */}
+                <button
+                  onClick={() => {
+                    setOpen(false);
+                    handleSignOut();
+                  }}
+                  className="mt-4 inline-flex items-center gap-2 px-6 py-3 border border-white/10 rounded-md text-gray-300 hover:text-white hover:border-blue-400/40 hover:bg-white/5 transition-all duration-200"
+                >
+                  <LogOut size={16} />
+                  <span>Sign out</span>
+                </button>
+              </>
             ) : (
               <Link
                 href="/login"

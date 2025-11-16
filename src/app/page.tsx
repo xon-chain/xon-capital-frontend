@@ -129,14 +129,41 @@ export default function HomePage() {
         >
           Consistent Alpha. Controlled Risk.
         </motion.h2>
-        <p className="text-gray-400 max-w-2xl mx-auto mb-12">
+        <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
           Our portfolio architecture emphasizes capital preservation and
-          risk-adjusted performance. Through volatility scaling, liquidity
-          weighting, and cross-venue diversification, we aim to deliver superior
-          Sharpe ratios independent of market direction.
+          risk-adjusted performance. Through disciplined volatility management,
+          liquidity weighting, and diversified exposure, Xon Capital aims to
+          deliver stable, uncorrelated returns across market cycles.
         </p>
-        <div className="max-w-5xl mx-auto bg-gradient-to-br from-gray-900/70 to-gray-800/40 border border-white/10 rounded-2xl h-72 flex items-center justify-center text-gray-500">
-          [ Performance Chart Placeholder ]
+
+        <div className="max-w-4xl mx-auto mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-left px-6">
+          {[
+            {
+              title: "Capital Preservation",
+              desc: "Every strategy is designed to limit drawdowns through dynamic position sizing, stop-loss triggers, and cross-venue liquidity buffers.",
+            },
+            {
+              title: "Volatility Discipline",
+              desc: "Risk is scaled relative to realized volatility, ensuring consistent return distribution and avoiding overexposure during high-stress regimes.",
+            },
+            {
+              title: "Diversified Exposure",
+              desc: "Multi-strategy deployment across derivatives, spot, and delta-neutral models enables performance independence from market direction.",
+            },
+          ].map((item, i) => (
+            <motion.div
+              key={i}
+              className="bg-gradient-to-br from-gray-900/60 to-gray-800/40 border border-white/10 rounded-2xl p-6 hover:border-blue-400/40 hover:shadow-[0_0_25px_rgba(0,150,255,0.1)] transition"
+              whileHover={{ scale: 1.02 }}
+            >
+              <h3 className="text-lg font-semibold mb-3 text-blue-300">
+                {item.title}
+              </h3>
+              <p className="text-gray-400 text-sm leading-relaxed">
+                {item.desc}
+              </p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -149,7 +176,7 @@ export default function HomePage() {
           Xon Capital operates at the intersection of quantitative research and
           crypto-native execution. Our strategies are engineered to perform
           across market cycles — extracting inefficiencies through data,
-          automation, and risk discipline.
+          automation, and disciplined risk management.
         </p>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 text-left">

@@ -70,32 +70,48 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Dropdown Menu */}
+      {/* Mobile Drawer Menu */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -15 }}
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden bg-black/95 border-t border-white/10 text-center py-6 space-y-4"
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.25 }}
+            className="md:hidden fixed top-0 left-0 w-full h-screen bg-gradient-to-b from-black/95 via-gray-950/95 to-black/95 backdrop-blur-lg border-t border-white/10 flex flex-col justify-center items-center text-center px-8"
           >
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className="block text-gray-300 hover:text-white transition"
-              >
-                {link.name}
-              </Link>
-            ))}
+            {/* Close Button */}
+            <button
+              onClick={() => setOpen(false)}
+              className="absolute top-6 right-6 text-gray-400 hover:text-white transition"
+              aria-label="Close Menu"
+            >
+              <X size={24} />
+            </button>
 
+            {/* Nav Links */}
+            <div className="space-y-8 mt-6">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setOpen(false)}
+                  className="block text-2xl tracking-wide text-gray-200 hover:text-white transition-all duration-150"
+                >
+                  {link.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Divider */}
+            <div className="w-16 h-px bg-white/10 my-8" />
+
+            {/* CTA Button */}
             {session ? (
               <Link
                 href="/dashboard"
                 onClick={() => setOpen(false)}
-                className="block px-4 py-2 mx-auto bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-400 text-black rounded-md w-40 font-semibold hover:opacity-90 transition"
+                className="inline-block px-6 py-3 bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-400 text-black font-semibold rounded-lg shadow-lg hover:opacity-90 hover:scale-[1.03] transition-all duration-200"
               >
                 Dashboard
               </Link>
@@ -103,11 +119,24 @@ export default function Navbar() {
               <Link
                 href="/login"
                 onClick={() => setOpen(false)}
-                className="block px-4 py-2 mx-auto rounded-md bg-gradient-to-r from-[#0a0f1a]/60 via-[#0a0f1a]/40 to-[#1a1f2a]/60 border border-white/10 backdrop-blur-md text-gray-200 hover:border-blue-400 hover:text-white hover:shadow-[0_0_15px_rgba(0,150,255,0.3)] w-40 transition-all duration-300"
+                className="inline-block px-6 py-3 rounded-md bg-gradient-to-r from-[#0a0f1a]/60 via-[#0a0f1a]/40 to-[#1a1f2a]/60 border border-white/10 backdrop-blur-md text-gray-200 font-medium tracking-wide hover:border-blue-400 hover:text-white hover:shadow-[0_0_15px_rgba(0,150,255,0.3)] hover:scale-[1.03] transition-all duration-300"
               >
                 Investor Login
               </Link>
             )}
+
+            {/* Footer Info */}
+            <div className="absolute bottom-8 text-xs text-gray-500 text-center space-y-1">
+              <p>© {new Date().getFullYear()} Xon Capital</p>
+              <p>
+                <a
+                  href="mailto:investorrelations@xon.capital"
+                  className="text-blue-400 hover:text-cyan-300 transition"
+                >
+                  investorrelations@xon.capital
+                </a>
+              </p>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

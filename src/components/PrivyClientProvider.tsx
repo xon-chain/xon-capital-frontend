@@ -8,7 +8,7 @@ export default function PrivyClientProvider({
 }: {
   children: React.ReactNode;
 }) {
-  // Suppress harmless internal hydration warnings
+  // Filter out Privy’s internal HTML warnings
   useEffect(() => {
     const original = console.error;
     console.error = (...args) => {
@@ -16,10 +16,9 @@ export default function PrivyClientProvider({
       if (
         typeof msg === "string" &&
         (msg.includes("<div> cannot be a descendant of <p>") ||
-          msg.includes("<p> cannot contain a nested <div>") ||
-          msg.includes("Hydration failed"))
+          msg.includes("<p> cannot contain a nested <div>"))
       ) {
-        return;
+        return; // ignore Privy UI hydration warnings
       }
       original(...args);
     };

@@ -1,20 +1,25 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { signIn } from "next-auth/react";
+import { usePrivy } from "@privy-io/react-auth";
 
 export default function LoginPage() {
+  const { ready, authenticated, login } = usePrivy();
+
+  if (!ready) return null;
+  if (authenticated) window.location.href = "/dashboard";
+
   return (
     <main className="relative flex flex-col items-center justify-center min-h-[85vh] bg-gradient-to-b from-black via-gray-950 to-black text-white overflow-hidden px-4">
-      {/* Soft ambient glow */}
+      {/* Ambient Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,150,255,0.15),transparent_70%)]" />
 
-      {/* Brand Watermark */}
+      {/* Watermark */}
       <div className="absolute text-[20vw] font-extrabold text-white/5 select-none tracking-tighter leading-none top-1/2 -translate-y-1/2">
         XON
       </div>
 
-      {/* Frosted Glass Login Card */}
+      {/* Login Card */}
       <motion.div
         initial={{ opacity: 0, y: 25 }}
         animate={{ opacity: 1, y: 0 }}
@@ -29,27 +34,25 @@ export default function LoginPage() {
           Secure access for accredited investors only.
         </p>
 
-        {/* Sign In Button */}
+        {/* Privy Sign In */}
         <motion.button
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.98 }}
-          onClick={() => signIn("azure-ad", { callbackUrl: "/dashboard" })}
+          onClick={login}
           className="w-full py-3.5 sm:py-4 rounded-lg font-semibold tracking-wide text-black bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-400 hover:shadow-[0_0_25px_rgba(0,150,255,0.25)] transition-all duration-200"
         >
           Sign In
         </motion.button>
 
-        {/* Divider */}
         <div className="mt-10 border-t border-white/10" />
 
-        {/* Compliance Note */}
         <p className="mt-6 text-xs sm:text-sm text-gray-500 leading-relaxed px-2">
-          By signing in, you acknowledge that you are an accredited investor and
-          agree to the terms of access to Xon Capital’s investor portal.
+          Access to this portal is restricted to accredited investors. By
+          signing in, you agree to maintain confidentiality and accept Xon
+          Capital’s access terms.
         </p>
       </motion.div>
 
-      {/* Bottom Gradient Glow */}
       <div className="absolute bottom-0 left-0 w-full h-64 bg-gradient-to-t from-black via-transparent to-transparent pointer-events-none" />
     </main>
   );

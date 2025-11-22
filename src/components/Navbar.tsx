@@ -4,11 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Menu, X, LogOut } from "lucide-react";
-import { useSession, signOut } from "next-auth/react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePrivy } from "@privy-io/react-auth";
 
 export default function Navbar() {
-  const { data: session } = useSession();
+  const { ready, authenticated, logout } = usePrivy();
   const [open, setOpen] = useState(false);
 
   const navLinks = [
@@ -16,28 +16,7 @@ export default function Navbar() {
     { name: "RISK", href: "/risk" },
   ];
 
-  // ✅ Azure AD + NextAuth unified sign-out with homepage redirect
-  const handleSignOut = async () => {
-    const tenantId = process.env.NEXT_PUBLIC_AZURE_AD_TENANT_ID;
-    const homepageUrl = window.location.origin + "/"; // Explicit homepage redirect
-
-    const logoutUrl = `https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/logout?post_logout_redirect_uri=${encodeURIComponent(
-      homepageUrl,
-    )}`;
-
-    // 1️⃣ Clear NextAuth session
-    await signOut({ redirect: false });
-
-    // 2️⃣ UX fade effect before redirect
-    document.body.style.transition = "opacity 0.4s ease";
-    document.body.style.opacity = "0.6";
-    document.body.style.cursor = "wait";
-
-    // 3️⃣ Redirect to Azure logout (which returns user to homepage)
-    setTimeout(() => {
-      window.location.href = logoutUrl;
-    }, 300);
-  };
+  if (!ready) return null;
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-sm border-none transition-all duration-300">
@@ -54,7 +33,7 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Desktop Links */}
+        {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-8 text-sm font-medium">
           {navLinks.map((link) => (
             <Link
@@ -66,9 +45,8 @@ export default function Navbar() {
             </Link>
           ))}
 
-          {session ? (
+          {authenticated ? (
             <>
-              {/* Dashboard Button */}
               <Link
                 href="/dashboard"
                 className="px-5 py-2 rounded-md bg-gradient-to-r from-blue-500 via-cyan-400 to-purple-400 text-black font-semibold shadow-lg hover:opacity-90 hover:scale-[1.02] transition-all duration-200"
@@ -76,9 +54,11 @@ export default function Navbar() {
                 Dashboard
               </Link>
 
-              {/* Unified Sign Out */}
               <button
-                onClick={handleSignOut}
+                onClick={() => {
+                  logout();
+                  setTimeout(() => (window.location.href = "/"), 400);
+                }}
                 className="flex items-center gap-2 px-4 py-2 border border-white/10 rounded-md text-gray-300 hover:text-white hover:border-blue-400/40 hover:bg-white/5 transition-all duration-200"
               >
                 <LogOut size={16} />
@@ -95,7 +75,7 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden text-gray-200 hover:text-white transition"
@@ -105,7 +85,7 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -124,7 +104,7 @@ export default function Navbar() {
               <X size={24} />
             </button>
 
-            {/* Nav Links */}
+            {/* Navigation Links */}
             <div className="space-y-8 mt-6">
               {navLinks.map((link) => (
                 <Link
@@ -138,11 +118,9 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Divider */}
             <div className="w-16 h-px bg-white/10 my-8" />
 
-            {/* CTA Buttons */}
-            {session ? (
+            {authenticated ? (
               <>
                 <Link
                   href="/dashboard"
@@ -152,11 +130,11 @@ export default function Navbar() {
                   Dashboard
                 </Link>
 
-                {/* Mobile Sign Out */}
                 <button
                   onClick={() => {
                     setOpen(false);
-                    handleSignOut();
+                    logout();
+                    setTimeout(() => (window.location.href = "/"), 400);
                   }}
                   className="mt-4 inline-flex items-center gap-2 px-6 py-3 border border-white/10 rounded-md text-gray-300 hover:text-white hover:border-blue-400/40 hover:bg-white/5 transition-all duration-200"
                 >
@@ -174,7 +152,7 @@ export default function Navbar() {
               </Link>
             )}
 
-            {/* Footer Info */}
+            {/* Footer */}
             <div className="absolute bottom-8 text-xs text-gray-500 text-center space-y-1">
               <p>© {new Date().getFullYear()} Xon Capital</p>
               <p>

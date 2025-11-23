@@ -2,34 +2,28 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { usePrivy } from "@privy-io/react-auth";
 import { Menu, X, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { usePrivy } from "@privy-io/react-auth";
 
 export default function Navbar() {
-  const { ready, authenticated, logout } = usePrivy();
   const [open, setOpen] = useState(false);
+  const { authenticated, logout } = usePrivy();
 
   const navLinks = [
-    { name: "STRATEGY", href: "/strategy" },
-    { name: "RISK", href: "/risk" },
+    { name: "Strategy", href: "/strategy" },
+    { name: "Risk", href: "/risk" },
   ];
 
-  if (!ready) return null;
-
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-transparent backdrop-blur-sm border-none transition-all duration-300">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
+    <nav className="w-full border-b border-white/10 bg-black/40 backdrop-blur-xl fixed top-0 left-0 z-50">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-3">
-          <Image
+        <Link href="/" className="flex items-center space-x-2">
+          <img
             src="/xoncapital_logo_transparent.png"
             alt="Xon Capital Logo"
-            width={160}
-            height={40}
-            priority
-            className="h-auto w-auto"
+            className="h-6 w-auto opacity-90 hover:opacity-100 transition"
           />
         </Link>
 
@@ -59,10 +53,18 @@ export default function Navbar() {
                   logout();
                   setTimeout(() => (window.location.href = "/"), 400);
                 }}
-                className="flex items-center gap-2 px-4 py-2 border border-white/10 rounded-md text-gray-300 hover:text-white hover:border-blue-400/40 hover:bg-white/5 transition-all duration-200"
+                className="relative group flex items-center gap-2 px-4 py-2 rounded-md 
+                border border-white/10 text-gray-300 font-medium tracking-wide 
+                hover:text-white hover:border-cyan-400/40 hover:bg-gradient-to-r 
+                from-gray-900/80 via-gray-800/70 to-gray-900/80 hover:shadow-[0_0_15px_rgba(0,200,255,0.15)] 
+                transition-all duration-300"
               >
-                <LogOut size={16} />
-                <span>Sign out</span>
+                <span className="absolute inset-0 rounded-md bg-gradient-to-r from-blue-500/0 via-cyan-400/0 to-purple-400/0 group-hover:from-blue-500/10 group-hover:via-cyan-400/10 group-hover:to-purple-400/10 blur-sm transition-all duration-300" />
+                <LogOut
+                  size={16}
+                  className="relative text-gray-400 group-hover:text-cyan-300 transition-transform duration-300 group-hover:-translate-x-0.5"
+                />
+                <span className="relative">Sign out</span>
               </button>
             </>
           ) : (
@@ -136,10 +138,18 @@ export default function Navbar() {
                     logout();
                     setTimeout(() => (window.location.href = "/"), 400);
                   }}
-                  className="mt-4 inline-flex items-center gap-2 px-6 py-3 border border-white/10 rounded-md text-gray-300 hover:text-white hover:border-blue-400/40 hover:bg-white/5 transition-all duration-200"
+                  className="relative group mt-4 inline-flex items-center gap-2 px-6 py-3 rounded-md 
+                  border border-white/10 text-gray-300 font-medium tracking-wide 
+                  hover:text-white hover:border-cyan-400/40 hover:bg-gradient-to-r 
+                  from-gray-900/80 via-gray-800/70 to-gray-900/80 hover:shadow-[0_0_15px_rgba(0,200,255,0.15)] 
+                  transition-all duration-300"
                 >
-                  <LogOut size={16} />
-                  <span>Sign out</span>
+                  <span className="absolute inset-0 rounded-md bg-gradient-to-r from-blue-500/0 via-cyan-400/0 to-purple-400/0 group-hover:from-blue-500/10 group-hover:via-cyan-400/10 group-hover:to-purple-400/10 blur-sm transition-all duration-300" />
+                  <LogOut
+                    size={16}
+                    className="relative text-gray-400 group-hover:text-cyan-300 transition-transform duration-300 group-hover:-translate-x-0.5"
+                  />
+                  <span className="relative">Sign out</span>
                 </button>
               </>
             ) : (

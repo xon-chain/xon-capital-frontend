@@ -47,30 +47,25 @@ export default function DashboardPage() {
           Welcome,{" "}
           <span className="text-blue-300 font-semibold">
             {String(displayName ?? "")}
-          </span>
+          </span>{" "}
           — your secure investor portal.
         </p>
 
-        {/* Example metric cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[
-            { label: "Fund AUM", value: "$128.5M" },
-            { label: "YTD Return", value: "+12.4%" },
-            { label: "Since Inception", value: "+89.2%" },
-          ].map((metric, i) => (
-            <div
-              key={i}
-              className="p-6 bg-gradient-to-br from-gray-900/70 to-gray-800/40 border border-white/10 rounded-xl shadow-md"
-            >
-              <p className="text-gray-400 text-sm uppercase tracking-wide mb-2">
-                {metric.label}
-              </p>
-              <p className="text-2xl font-semibold text-blue-300">
-                {metric.value}
-              </p>
-            </div>
-          ))}
-        </div>
+        {/* Placeholder for live data feed */}
+        <motion.div
+          className="p-10 border border-white/10 rounded-2xl bg-gradient-to-br from-gray-900/70 to-gray-800/40 text-gray-400 max-w-3xl mx-auto shadow-[0_0_30px_rgba(0,150,255,0.05)]"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          <p className="text-base sm:text-lg">
+            Your portfolio metrics and fund performance data will appear here
+            once synced with Xon Capital’s systems.
+          </p>
+          <p className="text-sm mt-3 text-gray-500">
+            Please check back later or contact investor relations for details.
+          </p>
+        </motion.div>
       </div>
     </main>
   );
